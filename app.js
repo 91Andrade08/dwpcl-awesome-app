@@ -1,10 +1,16 @@
+//Importando el modulo http
+import http from 'http';
 
 //Importando express js
-import express from 'express'
-
+import express from 'express';
+import { log } from 'console';
 
 // Creando una instancia de express
 const app = express();
+
+
+// Se registra el middleware del body-parser
+app.use(express.urlencoded({extended: true}));
 
 //Ruta about
 //GET /about
@@ -19,6 +25,32 @@ app.use('/about',(req,res)=>{
     <p>App for Fullstack Web Dev Course I!</p>
   `);
 });
+
+// GET '/add-product'
+app.get('/add-product', (req, res, next) => {
+    // Si la petición es post pasamos el siguiente
+    // Middleware
+    if(req.method === "POST") return next();
+  
+    // Servimos el formulario
+    console.log("📢 Sirviendo formulario...");
+    res.send(`
+    <form action="/add-product" method="POST">
+      <label>
+        Ingresar Nombre
+        <input type="text" name="title">
+      </label>
+      <button type="submit">Add product</button>
+    </form>
+    `);
+  });
+ // POST '/add-product'
+app.use('/add-product', (req, res)=>{
+    // Realizaremos la extracción de
+    // parametros dentro de la peticion
+    return res.json(req.body);
+    return res.redirect('/');
+  });
 
 // Ruta Raíz
 // GET /
