@@ -6,22 +6,34 @@ import express from 'express'
 // Creando una instancia de express
 const app = express();
 
+//Ruta about
+//GET /about
+
 //Registrando el primer middleware
-app.use((req,res,next)=>{
-    console.log("📢 Middleware #1");
-    //Pasamos la ejecución al siguiente responsable
-    next();
+app.use('/about',(req,res)=>{
+    console.log("📢 Sirviendo la ruta '/about'");
 
+    // Se contesta al server
+  res.send(`
+    <h1>🪄 About...</h1>
+    <p>App for Fullstack Web Dev Course I!</p>
+  `);
 });
-app.use((req,res,next)=>{
-    console.log("📢 Middleware #2");
-    //Pasamos la ejecución al siguiente responsable
+
+// Ruta Raíz
+// GET /
+app.use((req, res)=>{
+    console.log("📢 Sirviendo la ruta '/'");
+    // Se contesta al server
     res.send(`
-    <h1> Welcome to my first App</h1>
-    <p> This is my awesome app!!</p>
-    `)
+      <h1>Welcome to Express Js</h1>
+      <p>This is my awesome app! 😎</p>
+    `);
+  });
 
-});
+
+
+
 
 
 
@@ -31,7 +43,7 @@ const IP = "0.0.0.0"
 
 //Poniendo a trabajar el servidor
 app.listen(PORT, IP, (err)=>{
-    //Verificamo si hay error
+    //Verificamos si hay error
     if (err) console.log("❌ Error al arrancar el server 🙁");
     // 
     console.log(`🎉 Servidor escuchando en http://localhost:${PORT} 🎉 `);
