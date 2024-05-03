@@ -3,8 +3,26 @@ import http from 'http';
 //Importando express js
 import express from 'express'
 
+
 // Creando una instancia de express
 const app = express();
+
+//Registrando el primer middleware
+app.use((req,res,next)=>{
+    console.log("📢 Middleware #1");
+    //Pasamos la ejecución al siguiente responsable
+    next();
+
+});
+app.use((req,res,next)=>{
+    console.log("📢 Middleware #2");
+    //Pasamos la ejecución al siguiente responsable
+    res.send(`
+    <h1> Welcome to my first App</h1>
+    <p> This is my awesome app!!</p>
+    `)
+
+});
 
 // Creando servidor HTTP
 const server = http.createServer(app);
