@@ -44,14 +44,14 @@ app.get('/add-product', (req, res, next) => {
     </form>
     `);
   });
- // POST '/add-product'
-app.use('/add-product', (req, res)=>{
+
+// POST '/add-product'
+app.post('/add-product', (req, res)=>{
     // Realizaremos la extracción de
     // parametros dentro de la peticion
-    return res.json(req.body);
-    return res.redirect('/');
+    console.log(req.body);
+    res.redirect('/');
   });
-
 // Ruta Raíz
 // GET /
 app.use((req, res)=>{
