@@ -1,72 +1,21 @@
-//Importando el modulo http
-import http from 'http';
+
 
 //Importando express js
 import express from 'express';
-import { log } from 'console';
+
+// Importando el enrutador
+import adminRouter from './routes/admin.route';
+import shopRouter from './routes/shop.route.js';
 
 // Creando una instancia de express
 const app = express();
 
+app.use(express.urlencoded({ extended: true }));
 
-// Se registra el middleware del body-parser
-app.use(express.urlencoded({extended: true}));
-
-//Ruta about
-//GET /about
-
-//Registrando el primer middleware
-app.use('/about',(req,res)=>{
-    console.log("📢 Sirviendo la ruta '/about'");
-
-    // Se contesta al server
-  res.send(`
-    <h1>🪄 About...</h1>
-    <p>App for Fullstack Web Dev Course I!</p>
-  `);
-});
-
-// GET '/add-product'
-app.get('/add-product', (req, res, next) => {
-    // Si la petición es post pasamos el siguiente
-    // Middleware
-    if(req.method === "POST") return next();
-  
-    // Servimos el formulario
-    console.log("📢 Sirviendo formulario...");
-    res.send(`
-    <form action="/add-product" method="POST">
-      <label>
-        Ingresar Nombre
-        <input type="text" name="title">
-      </label>
-      <button type="submit">Add product</button>
-    </form>
-    `);
-  });
-
-// POST '/add-product'
-app.post('/add-product', (req, res)=>{
-    // Realizaremos la extracción de
-    // parametros dentro de la peticion
-    console.log(req.body);
-    res.redirect('/');
-  });
-// Ruta Raíz
-// GET /
-app.use((req, res)=>{
-    console.log("📢 Sirviendo la ruta '/'");
-    // Se contesta al server
-    res.send(`
-      <h1>Welcome to Express Js</h1>
-      <p>This is my awesome app! 😎</p>
-    `);
-  });
-
-
-
-
-
+// Se agrega ruta de administrador
+app.use(adminRouter);
+// Se agrega ruta shop
+app.use(shopRouter);
 
 
 //Establecer configuraciones del server
