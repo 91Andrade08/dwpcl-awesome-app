@@ -26,6 +26,10 @@
   },
   "homepage": "https://github.com/91Andrade08/dwpcl-awesome-app#readme",
   "dependencies": {
-    "express": "^4.19.2"
-  }
+    "express": "^4.19.2",
+    "http-status": "^1.6.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+}
 }
