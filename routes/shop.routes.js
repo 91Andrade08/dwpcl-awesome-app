@@ -7,14 +7,14 @@ import path from 'path';
 const router = Router();
 
 // Importando productos
-import { products } from './admin.route.js';
+import { products } from './admin.routes.js';
 
 // GET /
 router.get('/', (req, res)=>{
   // Mostrando productos en memoria
   console.log(products);
   console.log("📢 Sirviendo la ruta '/'");
-  res.render('shop');
+  res.render('shop', {shop: 'active'});
 });
 
 // GET /about
