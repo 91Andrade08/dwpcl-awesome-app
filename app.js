@@ -14,7 +14,7 @@ const app = express();
 app.use(express.urlencoded({ extended: true }));
 
 // Se agrega ruta de administrador
-app.use(adminRouter);
+app.use('/admin', adminRouter);
 // Se agrega ruta shop
 app.use(shopRouter);
 
@@ -34,6 +34,23 @@ app.listen(PORT, IP, (err)=>{
     //Verificamos si hay error
     if (err) console.log("❌ Error al arrancar el server 🙁");
     // 
-    console.log(`🎉 Servidor escuchando en http://localhost:${PORT} 🎉 `);
+    console.log(`🎉 Servidor en http://localhost:${PORT} 🎉 `);
+
+    // Se agrega ruta shop
+app.use(shopRouter);
+
+// Registrando middleware para
+// el error 404
+app.use((req, res) => {
+  res.status(httpStatus.NOT_FOUND).send(`
+  <h1 
+    style="color: crimson; text-align: center; font-size: 400%; margin: 3em 0 0 0">
+  🤷 404 RESOURCE NOT FOUND 🤷
+  </h1>
+  `);
+});
+
+// Definiendo puertos
+const port = 3000;
 
 });

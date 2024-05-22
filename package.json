@@ -3,7 +3,10 @@
   "version": "0.0.0",
   "description": "Proyecto de la clase de la materia DWPCI 2024A",
   "type": "module",
-  "engines":{"node":"20.x", "npm": "10.x"},
+  "engines": {
+    "node": "20.x",
+    "npm": "10.x"
+  },
   "main": "app.js",
   "scripts": {
     "start": "node ./app.js",
@@ -27,9 +30,9 @@
   "homepage": "https://github.com/91Andrade08/dwpcl-awesome-app#readme",
   "dependencies": {
     "express": "^4.19.2",
-    "http-status": "^1.6.2"
+    "http-status": "^1.7.4"
   },
   "devDependencies": {
     "nodemon": "^2.0.22"
-}
+  }
 }
