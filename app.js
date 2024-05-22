@@ -5,8 +5,8 @@ import express from 'express';
 import httpStatus from 'http-status';
 
 // Importando el enrutador
-import adminRouter from './routes/admin.route';
-import shopRouter from './routes/shop.route.js';
+import adminRouter from './routes/admin.routes.js';
+import shopRouter from './routes/shop.routes.js';
 
 // Creando una instancia de express
 const app = express();
