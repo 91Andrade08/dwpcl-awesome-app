@@ -1,8 +1,7 @@
-
-
-//Importando express js
+// Importando Express
 import express from 'express';
 import httpStatus from 'http-status';
+
 // Template Engine
 import { engine } from 'express-handlebars';
 
@@ -13,7 +12,11 @@ import shopRouter from './routes/shop.routes.js';
 // Importando el directorio raiz
 import { ROOT_DIR } from './helpers/paths.js'
 
-// Creando una instancia de express
+// Se importa path
+import path from 'path';
+
+// Creando la instancia de express
+// que basicamente es un middleware
 const app = express();
 
 // Se crea instancia del template engine
@@ -23,6 +26,7 @@ const hbsTemplateEngine = engine({
   // Nombre del diseño por defecto
   defaultLayout: 'main',
 });
+
 // TE1. Se registra en la instancia de express
 app.engine('hbs', hbsTemplateEngine);
 
@@ -41,39 +45,21 @@ app.use(express.static(path.join(ROOT_DIR, 'public')));
 
 // Se agrega ruta de administrador
 app.use('/admin', adminRouter);
+// Se agrega ruta shop
+app.use(shopRouter);
+
 // Registrando el middleware para el error
 // 404
 app.use((req, res, next) => {
-    res.status(httpStatus.NOT_FOUND)
-    .send("<h1 style='color: crimson;'>🤷‍♂️ Not found 🤷‍♂️</h1>")
-  });
-
-//Establecer configuraciones del server
-const PORT = 3000;
-const IP = "0.0.0.0"
-
-//Poniendo a trabajar el servidor
-app.listen(PORT, IP, (err)=>{
-    //Verificamos si hay error
-    if (err) console.log("❌ Error al arrancar el server 🙁");
-    // 
-    console.log(`🎉 Servidor en http://localhost:${PORT} 🎉 `);
-
-    // Se agrega ruta shop
-app.use(shopRouter);
-
-// Registrando middleware para
-// el error 404
-app.use((req, res) => {
-  res.status(httpStatus.NOT_FOUND).send(`
-  <h1 
-    style="color: crimson; text-align: center; font-size: 400%; margin: 3em 0 0 0">
-  🤷 404 RESOURCE NOT FOUND 🤷
-  </h1>
-  `);
+  res.status(httpStatus.NOT_FOUND)
+  .sendFile(path.resolve('views','404.html'))
 });
 
 // Definiendo puertos
 const port = 3000;
+const ip = "0.0.0.0"
 
+// Arrancando el servidor
+app.listen(port, ip, () => {
+  console.log(`🤖 Sirviendo en http://localhost:${port}`);
 });
