@@ -12,11 +12,18 @@ const router = Router();
 export const products = [];
 
 
-// GET /add-product
+// GET /admin/add-product
 router.get('/add-product', (req, res, next) => {
   // Servimos el formulario
   console.log("📢 Sirviendo formulario...");
-  res.sendFile(path.join(ROOT_DIR, 'views','add-product.html'));
+  res.render('add-product',{layout: false});
+});
+// GET /
+router.get('/', (req, res)=>{
+  // Mostrando productos en memoria
+  console.log(products);
+  console.log("📢 Sirviendo la ruta '/'");
+  res.render('shop',{layout: false});
 });
 
 // POST /admin/add-product
