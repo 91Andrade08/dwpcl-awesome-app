@@ -7,7 +7,7 @@ import path from 'path';
 const router = Router();
 
 // Importando productos
-import { products } from './admin.routes.js';
+import { products } from './admin.route.js';
 
 // GET /
 router.get('/', (req, res)=>{
@@ -15,13 +15,6 @@ router.get('/', (req, res)=>{
   console.log(products);
   console.log("📢 Sirviendo la ruta '/'");
   res.render('shop');
-});
-
-// GET /admin/add-product
-router.get('/add-product', (req, res, next) => {
-  // Servimos el formulario
-  console.log("📢 Sirviendo formulario...");
-  res.render('add-product');
 });
 
 // GET /about
